@@ -15,14 +15,19 @@ Features:
 
 ## Install
 
-`npm install koa-ios-api`
+`git clone https://github.com/shanev/koa-ios-api && cd koa-ios-api`
+
+`npm install`
 
 Create a .env file with environment variables specific to your app:
 
 ```
+APN_AUTH_KEYPATH=xxx
+APN_KEY_ID=xxx
+APN_TEAM_ID=xxx
+JWT_SECRET=secret
 MONGO_URL=mongodb://localhost/your-app-db
 MONGOOSE_DEBUG=false
-JWT_SECRET=secret
 REDIS_URL=redis://localhost:6379
 ```
 
