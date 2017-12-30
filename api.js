@@ -1,4 +1,5 @@
 // External modules
+const jwt = require('jsonwebtoken');
 const koaJWT = require('koa-jwt');
 const Router = require('koa-router');
 
@@ -21,11 +22,13 @@ const router = new Router({
 // middleware to validate JWT token
 const auth = koaJWT({ secret: process.env.JWT_SECRET });
 
+// get user
 router.get('/users/self', auth, async (ctx) => {
   const userId = ctx.state.user.id;
   ctx.body = await User.findById(userId);
 });
 
+// update user field
 router.put('/users/self', auth, async (ctx) => {
   const userId = ctx.state.user.id;
   const body = ctx.request.body;
@@ -37,6 +40,15 @@ router.put('/users/self', auth, async (ctx) => {
   ctx.status = 200;
 });
 
+// create new user
+router.post('/users', async (ctx) => {
+  // create new user
+  // sign jwt with user id
+  // const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { noTimestamp: true });
+  // ctx.body = { token };
+});
+
+// add device token to user
 router.post('/users/self/deviceToken', auth, async (ctx) => {
   const userId = ctx.state.user.id;
   const deviceToken = ctx.request.body.deviceToken;

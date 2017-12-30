@@ -28,8 +28,16 @@ REDIS_URL=redis://localhost:6379
 
 ## Run
 
-```
-npm run mongo
-npm run redis
-npm start
-```
+Start MongoDB:
+
+`npm run mongo`
+
+Start Redis (optional):
+
+`npm run redis`
+
+Start Koa:
+
+`npm start`
+
+
