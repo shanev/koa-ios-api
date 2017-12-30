@@ -1,0 +1,33 @@
+{
+  "name": "koa-ios-api",
+  "version": "0.0.1",
+  "main": "app.js",
+  "repository": "https://github.com/shanev/koa-ios-api.git",
+  "author": "Shane Vitarana <shanev@gmail.com>",
+  "license": "Copyright (c) 2017 Shane Vitarana",
+  "engines": {
+    "node": "8.x"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "mongo": "mongod --config /usr/local/etc/mongod.conf",
+    "test": "NODE_ENV=test mocha"
+  },
+  "dependencies": {
+    "apn": "*",
+    "dotenv": "*",
+    "koa": "*",
+    "koa-bodyparser": "*",
+    "koa-router": "*",
+    "mongodb": "*",
+    "mongoose": "*"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*",
+    "mocha": "*",
+    "mocha-mongoose": "*",
+    "supertest": "*"
+  }
+}
