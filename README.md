@@ -26,5 +26,10 @@ JWT_SECRET=secret
 REDIS_URL=redis://localhost:6379
 ```
 
-`npm start`
+## Run
 
+```
+npm run mongo
+npm run redis
+npm start
+```

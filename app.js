@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const api = require('api.js');
+const api = require('./api.js');
 const bodyParser = require('koa-bodyparser');
 const Koa = require('koa');
 const mongoose = require('./lib/mongoose');
@@ -26,7 +26,7 @@ app.use(api.routes());
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  debug(`Koa server started on port ${port}`);
+  console.log(`Koa server started on port ${port}`);
 });
 
 module.exports = app;

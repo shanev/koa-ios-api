@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node app.js",
     "mongo": "mongod --config /usr/local/etc/mongod.conf",
+    "redis": "redis-server /usr/local/etc/redis.conf",
     "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
