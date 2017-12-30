@@ -14,13 +14,15 @@
     "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
-    "apn": "*",
-    "dotenv": "*",
-    "koa": "*",
-    "koa-bodyparser": "*",
-    "koa-router": "*",
-    "mongodb": "*",
-    "mongoose": "*"
+    "apn": "^2.2.0",
+    "dotenv": "^4.0.0",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^3.3.0",
+    "koa-router": "^7.3.0",
+    "mongodb": "^3.0.1",
+    "mongoose": "^4.13.8",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "eslint": "*",
