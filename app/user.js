@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
       trim: true,
     },
   },
-}, { timestamps: true });
+});
 
 // Pre hook for `findOneAndUpdate`
 UserSchema.pre('findOneAndUpdate', function preUpdate(next) {
