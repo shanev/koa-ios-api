@@ -13,6 +13,8 @@ Features:
 * Push notifications using [node-apn](https://github.com/node-apn/node-apn)
 * User model and API for saving device tokens
 
+**_NOTE: This project is being extracted from a few others and is not currently production ready._**
+
 ## Install
 
 `git clone https://github.com/shanev/koa-ios-api && cd koa-ios-api`
