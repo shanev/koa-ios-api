@@ -47,4 +47,6 @@ Start Koa:
 
 `npm start`
 
+## Tests
 
+`npm test`
