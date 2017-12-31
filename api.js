@@ -48,14 +48,18 @@ router.post('/users', async (ctx) => {
   // ctx.body = { token };
 });
 
-// add device token to user
-router.post('/users/self/deviceToken', auth, async (ctx) => {
+/**
+ * POST /users/1/devices
+ * Body Parameters: device
+ * Save a user's device token.
+ */
+router.post('/users/self/devices', auth, async (ctx) => {
   const userId = ctx.state.user.id;
-  const deviceToken = ctx.request.body.deviceToken;
-  if (deviceToken == null) {
+  const device = ctx.request.body.device;
+  if (device == null) {
     throw new InvalidRequestError();
   }
-  await User.findOneAndUpdate({ _id: userId }, { deviceToken });
+  await User.findOneAndUpdate({ _id: userId }, { device });
   ctx.status = 200;
 });
 

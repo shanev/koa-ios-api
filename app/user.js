@@ -1,7 +1,12 @@
 const mongoose = require('../lib/mongoose');
 
 const UserSchema = new mongoose.Schema({
-  deviceToken: { type: String, trim: true },
+  device: {
+    token: {
+      type: String,
+      trim: true,
+    },
+  },
 }, { timestamps: true });
 
 // Pre hook for `findOneAndUpdate`
