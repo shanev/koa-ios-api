@@ -40,12 +40,14 @@ router.put('/users/self', auth, async (ctx) => {
   ctx.status = 200;
 });
 
-// create new user
+/**
+ * POST /users
+ * Create new user.
+ */
 router.post('/users', async (ctx) => {
-  // create new user
-  // sign jwt with user id
-  // const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { noTimestamp: true });
-  // ctx.body = { token };
+  const user = new User();
+  await user.save();
+  ctx.status = 200;
 });
 
 /**
