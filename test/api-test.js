@@ -1,29 +1,31 @@
 const app = require('../app.js');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const request = require('supertest').agent(app.listen());
 const User = require('../app/user');
 
 describe('API', () => {
   describe('/api/v1/users', () => {
     describe('POST', () => {
-      it('should create a user', () => {
+      it('should create a user', (done) => {
         request
           .post('/api/v1/users')
           .expect('Content-Length', '148')
-          .expect(200);
+          .expect(200, done);
       });
     });
   });
 
   describe('/api/v1/users/self', () => {
     describe('GET', () => {
-      it('should get a user', async () => {
-        const users = await User.find({});
-        console.log(users);
-        request
-          .get('/api/v1/users')
-          // .set('Authorization', `Bearer ${token}`)
-          .expect(200);
+      it('should get a user', (done) => {
+        User.find({})
+          .then((users) => {
+            const token = jwt.sign({ id: users[0].id }, process.env.JWT_SECRET);
+            request
+              .get('/api/v1/users/self')
+              .set('Authorization', `Bearer ${token}`)
+              .expect(200, done);
+          });
       });
     });
   });
