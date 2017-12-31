@@ -8,6 +8,7 @@ describe('API', () => {
       it('should create a user', (done) => {
         request
           .post('/api/v1/users')
+          .expect('Content-Length', '148')
           .expect(200, done);
       });
     });

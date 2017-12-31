@@ -4,49 +4,49 @@ const koaJWT = require('koa-jwt');
 const Router = require('koa-router');
 
 // Internal modules
-const ClientError = require('./lib/client-error');
+const { InvalidRequestError } = require('./lib/error');
 const User = require('./app/user');
 
-// 400 error
-class InvalidRequestError extends ClientError {
-  constructor() {
-    super();
-    this.message = 'Invalid fields sent with request';
-  }
-}
-
-const router = new Router({
-  prefix: '/api/v1',
-});
-
-// middleware to validate JWT token
+// Middleware: JWT token validation
 const auth = koaJWT({ secret: process.env.JWT_SECRET });
 
-// get user
-router.get('/users/self', auth, async (ctx) => {
-  const userId = ctx.state.user.id;
-  ctx.body = await User.findById(userId);
-});
-
-// update user field
-router.put('/users/self', auth, async (ctx) => {
-  const userId = ctx.state.user.id;
-  const body = ctx.request.body;
-  const keys = Object.keys(body);
-  if (keys.length === 0) {
-    throw new InvalidRequestError();
-  }
-  await User.findOneAndUpdate({ _id: userId }, body);
-  ctx.status = 200;
+// Prefix API with version number
+const router = new Router({
+  prefix: '/api/v1',
 });
 
 /**
  * POST /users
  * Create new user.
+ * Send back JWT for authentication.
  */
 router.post('/users', async (ctx) => {
   const user = new User();
   await user.save();
+  ctx.body = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+});
+
+/**
+ * GET /users/self
+ * Get user associated with JWT token.
+ */
+router.get('/users/self', auth, async (ctx) => {
+  const userId = ctx.state.user.id;
+  ctx.body = await User.findById(userId);
+});
+
+/**
+ * PUT /users/self
+ * Update user properties.
+ */
+router.put('/users/self', auth, async (ctx) => {
+  const userId = ctx.state.user.id;
+  const { body } = ctx.request.body;
+  const keys = Object.keys(body);
+  if (keys.length === 0) {
+    throw new InvalidRequestError();
+  }
+  await User.findOneAndUpdate({ _id: userId }, body);
   ctx.status = 200;
 });
 
