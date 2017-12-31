@@ -1,12 +1,9 @@
 require('dotenv').config();
+require('./lib/mongoose');
 
 const api = require('./api.js');
 const bodyParser = require('koa-bodyparser');
 const Koa = require('koa');
-const mongoose = require('./lib/mongoose');
-
-// configure and setup Mongoose
-require('./lib/mongoose');
 
 const app = new Koa();
 
