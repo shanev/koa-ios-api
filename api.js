@@ -7,9 +7,6 @@ const Router = require('koa-router');
 const { InvalidRequestError } = require('./lib/error');
 const User = require('./app/user');
 
-// Middleware: JWT token validation
-const auth = koaJWT({ secret: process.env.JWT_SECRET });
-
 // Prefix API with version number
 const router = new Router({
   prefix: '/api/v1',
@@ -25,6 +22,9 @@ router.post('/users', async (ctx) => {
   await user.save();
   ctx.body = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 });
+
+// Middleware: JWT token validation
+const auth = koaJWT({ secret: process.env.JWT_SECRET });
 
 /**
  * GET /users/self
