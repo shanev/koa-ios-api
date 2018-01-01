@@ -1,6 +1,6 @@
 # Koa iOS API
 
-Barebones API server for iOS apps using ES2017 Javascript and best practices. Built on (Koa)[http://koajs.com], the next-generation web framework for node.js. Fork it as a starting point for your own server.
+Barebones API server for iOS apps using ES2017 Javascript and best practices. Built on [Koa](http://koajs.com), the next-generation web framework for node.js. Fork it as a starting point for your own server.
 
 Stack:
 
