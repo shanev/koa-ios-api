@@ -1,6 +1,6 @@
 # Koa iOS API
 
-Koa backend API server boilerplate for iOS apps using ES2017 Javascript and best practices. Fork it as a starting point for your own server.
+Barebones API server for iOS apps using ES2017 Javascript and best practices. Built on (Koa)[http://koajs.com], the next-generation web framework for node.js. Fork it as a starting point for your own server.
 
 Stack:
 
@@ -11,7 +11,10 @@ Features:
 
 * Authentication using JSON Web Tokens
 * Push notifications using [node-apn](https://github.com/node-apn/node-apn)
-* User model and API for saving device tokens
+* REST API
+* User model
+
+Requires node v7.6.0 or higher for async function support.
 
 ## Install
 
