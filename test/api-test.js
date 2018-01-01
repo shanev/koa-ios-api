@@ -1,4 +1,6 @@
 const app = require('../app.js');
+const assert = require('assert');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const request = require('supertest').agent(app.listen());
 const User = require('../app/user');
@@ -33,13 +35,18 @@ describe('API', () => {
       it('should update device token', (done) => {
         User.find({})
           .then((users) => {
+            const deviceToken = crypto.randomBytes(32).toString('hex');
             const token = jwt.sign({ id: users[0].id }, process.env.JWT_SECRET);
-            const data = { device: { token: 'ad9s8f7a9ds8f7ads98f7' } };
+            const data = { device: { token: deviceToken } };
             request
               .put('/api/v1/users/self')
               .set('Authorization', `Bearer ${token}`)
               .send(data)
-              .expect(200, /ad9s8f7a9ds8f7ads98f7/, done);
+              .expect(200)
+              .end((err, res) => {
+                assert(res.body.device.token === deviceToken);
+                done();
+              });
           });
       });
     });
