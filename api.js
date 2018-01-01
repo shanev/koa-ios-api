@@ -24,6 +24,7 @@ router.post('/users', async (ctx) => {
 });
 
 // Middleware: JWT token validation
+// Decrypted user id gets stored in ctx.state.user.id
 const auth = koaJWT({ secret: process.env.JWT_SECRET });
 
 /**
@@ -31,8 +32,7 @@ const auth = koaJWT({ secret: process.env.JWT_SECRET });
  * Get user associated with JWT token.
  */
 router.get('/users/self', auth, async (ctx) => {
-  const userId = ctx.state.user.id;
-  ctx.body = await User.findById(userId);
+  ctx.body = await User.findById(ctx.state.user.id);
 });
 
 /**
@@ -40,13 +40,11 @@ router.get('/users/self', auth, async (ctx) => {
  * Update user properties.
  */
 router.put('/users/self', auth, async (ctx) => {
-  const userId = ctx.state.user.id;
   const { body } = ctx.request;
-  const keys = Object.keys(body);
-  if (keys.length === 0) {
+  if (Object.keys(body).length === 0) {
     throw new InvalidRequestError();
   }
-  ctx.body = await User.findAndUpdate(userId, body);
+  ctx.body = await User.findAndUpdate(ctx.state.user.id, body);
 });
 
 module.exports = router;
