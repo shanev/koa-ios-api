@@ -9,10 +9,8 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// Pre hook for `findOneAndUpdate`
-UserSchema.pre('findOneAndUpdate', function preUpdate(next) {
-  this.options.runValidators = true;
-  next();
-});
+UserSchema.statics.findAndUpdate = function findAndUpdate(userId, body) {
+  return this.findOneAndUpdate({ _id: userId }, body, { new: true });
+};
 
 module.exports = mongoose.model('User', UserSchema);
