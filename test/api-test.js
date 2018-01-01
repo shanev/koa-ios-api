@@ -39,7 +39,7 @@ describe('API', () => {
               .put('/api/v1/users/self')
               .set('Authorization', `Bearer ${token}`)
               .send(data)
-              .expect(200, done);
+              .expect(200, /ad9s8f7a9ds8f7ads98f7/, done);
           });
       });
     });

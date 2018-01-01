@@ -46,8 +46,7 @@ router.put('/users/self', auth, async (ctx) => {
   if (keys.length === 0) {
     throw new InvalidRequestError();
   }
-  await User.findOneAndUpdate({ _id: userId }, body);
-  ctx.status = 200;
+  ctx.body = await User.findOneAndUpdate({ _id: userId }, body);
 });
 
 module.exports = router;
